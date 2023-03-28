@@ -33,6 +33,7 @@ public class PruebaInterfaz_chat extends JFrame{
 
         add(chatPanel, BorderLayout.CENTER);
         add(inputPanel, BorderLayout.SOUTH);
+        //Hola
     }
 
     private class SendButtonListener implements ActionListener {
