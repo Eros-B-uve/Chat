@@ -48,6 +48,7 @@ public class PruebaInterfaz_chat extends JFrame{
     public static void main(String[] args) {
         PruebaInterfaz_chat chat = new PruebaInterfaz_chat();
         chat.setVisible(true);
+        chat.setLocationRelativeTo(null);
     }
 
 
