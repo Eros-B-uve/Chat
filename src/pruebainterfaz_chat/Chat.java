@@ -19,22 +19,30 @@ public class Chat extends JFrame{
         setTitle("Interfaz Chat");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(500, 500);
+        setLayout(null);
+        
 
-        JPanel chatPanel = new JPanel(new BorderLayout());
+        JPanel chatPanel = new JPanel(null);
         chatBox = new JTextArea();
         chatBox.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(chatBox);
-        chatPanel.add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setBounds(0,0,500,500);
+        chatPanel.add(scrollPane);
 
-        JPanel inputPanel = new JPanel(new BorderLayout());
+        JPanel inputPanel = new JPanel(null);
         inputField = new JTextField();
+        inputField.setBounds(0,0,400,30);
         JButton enviar = new JButton("Enviar");
         enviar.addActionListener(new SendButtonListener());
-        inputPanel.add(inputField, BorderLayout.CENTER);
-        inputPanel.add(enviar, BorderLayout.EAST);
+        enviar.setBounds(400, 0, 100, 30);
+        inputPanel.add(inputField);
+        inputPanel.add(enviar);
+        
+        chatPanel.setBounds(0,0,500,400);
+        inputPanel.setBounds(0,400,500,100);
 
-        add(chatPanel, BorderLayout.CENTER);
-        add(inputPanel, BorderLayout.SOUTH);
+        add(chatPanel);
+        add(inputPanel);
         System.out.println("Hola");
         System.out.println("Holaaa");
         
