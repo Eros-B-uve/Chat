@@ -5,7 +5,7 @@
  */
 package pruebainterfaz_chat;
 import javax.swing.*;
-import java.awt.*;
+//import java.awt.*;
 import java.awt.event.*;
 
 public class Chat extends JFrame{
@@ -14,47 +14,50 @@ public class Chat extends JFrame{
     private JTextField inputField;
     Usuario u;
 
-    public Chat() {
-        setTitle("Interfaz Chat");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 500);
+    public Chat(Usuario u) {
+        this.u = u;
+        this.setTitle("Interfaz Chat");
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(500, 500);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setLayout(null);
 
-        JPanel chatPanel = new JPanel(new BorderLayout());
+        componentes();
+    }
+
+    private void componentes() {
+        JPanel panel = new JPanel(null);
+
         chatBox = new JTextArea();
         chatBox.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(chatBox);
-        chatPanel.add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setBounds(0,0,500,500);
+        panel.add(scrollPane);
 
-        JPanel inputPanel = new JPanel(new BorderLayout());
+        JPanel inputPanel = new JPanel(null);
         inputField = new JTextField();
+        inputField.setBounds(0,0,400,30);
         JButton enviar = new JButton("Enviar");
+        enviar.setBackground(u.getColor());
         enviar.addActionListener(new SendButtonListener());
-        inputPanel.add(inputField, BorderLayout.CENTER);
-        inputPanel.add(enviar, BorderLayout.EAST);
-
-        add(chatPanel, BorderLayout.CENTER);
-        add(inputPanel, BorderLayout.SOUTH);
-        System.out.println("Hola");
-        System.out.println("Holaaa");
+        enviar.setBounds(400, 0, 100, 30);
+        inputPanel.add(inputField);
+        inputPanel.add(enviar);
         
-        //String s = inputField.getText();
-        Color color = Color.GREEN;
-        u = new Usuario("Eros", color);
+        panel.setBounds(0,0,500,400);
+        inputPanel.setBounds(0,400,500,100);
+
+        add(panel);
+        add(inputPanel);
     }
 
     private class SendButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String inputText = inputField.getText();
-            chatBox.append(u.getNombre() + ": " + inputText + "\n");
+            chatBox.append(u.getNombre() + ": " + inputField.getText() + "\n");
             inputField.setText("");
         }
     }
-    /*
-    public static void main(String[] args) {
-        PruebaInterfaz_chat chat = new PruebaInterfaz_chat();
-        chat.setVisible(true);
-        chat.setLocationRelativeTo(null);
-    }*/
 
 
 }
