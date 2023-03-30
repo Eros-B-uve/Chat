@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,7 +15,8 @@ import javax.swing.JTextField;
 public class Log extends JFrame implements ActionListener {
 
     JTextField FieldNombre;
-    JButton conectar;
+    JButton conectar, colores;
+    Color colorr;
 
     public Log() {
         this.setTitle("Interfaz Chat");
@@ -39,13 +41,18 @@ public class Log extends JFrame implements ActionListener {
         FieldNombre = new JTextField();
         FieldNombre.setBounds(100, 200, 200, 30);
 
+        colores = new JButton("Colores");
+        colores.setBounds(300, 200, 100, 30);
+        colores.addActionListener(this);
+        
         conectar = new JButton("Conectar");
-        conectar.setBounds(300, 200, 100, 30);
+        conectar.setBounds(200, 250, 100, 30);
         conectar.addActionListener(this);
 
         panel.add(titulo);
         panel.add(FieldNombre);
         panel.add(conectar);
+        panel.add(colores);
         this.add(panel);
     }
 
@@ -66,6 +73,11 @@ public class Log extends JFrame implements ActionListener {
                 ventanaChat.setLocationRelativeTo(null);
                 setVisible(false);
             }
+        }
+        
+        if(e.getSource()== colores){
+            JColorChooser Selectorcolor=new JColorChooser();
+                colorr=Selectorcolor.showDialog(null, "Seleccione un Color", Color.BLUE);
         }
     }
 }
