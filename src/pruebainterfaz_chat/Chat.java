@@ -19,19 +19,21 @@ public class Chat extends JFrame{
         this.setTitle("Interfaz Chat");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(500, 500);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setLayout(null);
 
         componentes();
     }
 
     private void componentes() {
-        JPanel chatPanel = new JPanel(null);
+        JPanel panel = new JPanel(null);
 
         chatBox = new JTextArea();
         chatBox.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(chatBox);
         scrollPane.setBounds(0,0,500,500);
-        chatPanel.add(scrollPane);
+        panel.add(scrollPane);
 
         JPanel inputPanel = new JPanel(null);
         inputField = new JTextField();
@@ -42,12 +44,11 @@ public class Chat extends JFrame{
         inputPanel.add(inputField);
         inputPanel.add(enviar);
         
-        chatPanel.setBounds(0,0,500,400);
+        panel.setBounds(0,0,500,400);
         inputPanel.setBounds(0,400,500,100);
 
-        add(chatPanel);
+        add(panel);
         add(inputPanel);
-
     }
 
     private class SendButtonListener implements ActionListener {

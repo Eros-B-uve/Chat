@@ -23,6 +23,7 @@ public class Log extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setLayout(null);
 
         componentes();
@@ -59,7 +60,6 @@ public class Log extends JFrame implements ActionListener {
     public static void main(String args[]) {
         Log log = new Log();
         log.setVisible(true);
-        log.setResizable(false);
     }
 
     @Override
