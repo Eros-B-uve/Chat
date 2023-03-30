@@ -5,7 +5,7 @@
  */
 package pruebainterfaz_chat;
 import javax.swing.*;
-import java.awt.*;
+//import java.awt.*;
 import java.awt.event.*;
 
 public class Chat extends JFrame{
@@ -16,13 +16,17 @@ public class Chat extends JFrame{
 
     public Chat(Usuario u) {
         this.u = u;
-        setTitle("Interfaz Chat");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 500);
-        setLayout(null);
-        
+        this.setTitle("Interfaz Chat");
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(500, 500);
+        this.setLayout(null);
 
+        componentes();
+    }
+
+    private void componentes() {
         JPanel chatPanel = new JPanel(null);
+
         chatBox = new JTextArea();
         chatBox.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(chatBox);
@@ -43,6 +47,7 @@ public class Chat extends JFrame{
 
         add(chatPanel);
         add(inputPanel);
+
     }
 
     private class SendButtonListener implements ActionListener {
