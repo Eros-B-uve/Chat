@@ -67,8 +67,10 @@ public class Log extends JFrame implements ActionListener {
         if (e.getSource() == conectar) {
             if (FieldNombre.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Debes ingresar un nombte");
+            } else if(colorr == null) {
+                JOptionPane.showMessageDialog(null, "Debes seleccionar un color");
             } else {
-                Chat ventanaChat = new Chat(new Usuario(FieldNombre.getText(), Color.yellow));
+                Chat ventanaChat = new Chat(new Usuario(FieldNombre.getText(), colorr));
                 ventanaChat.setVisible(true);
                 ventanaChat.setLocationRelativeTo(null);
                 setVisible(false);

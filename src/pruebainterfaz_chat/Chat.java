@@ -39,6 +39,7 @@ public class Chat extends JFrame{
         inputField = new JTextField();
         inputField.setBounds(0,0,400,30);
         JButton enviar = new JButton("Enviar");
+        enviar.setBackground(u.getColor());
         enviar.addActionListener(new SendButtonListener());
         enviar.setBounds(400, 0, 100, 30);
         inputPanel.add(inputField);
