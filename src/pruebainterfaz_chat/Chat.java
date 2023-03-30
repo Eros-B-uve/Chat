@@ -8,13 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class PruebaInterfaz_chat extends JFrame{
+public class Chat extends JFrame{
 
     private JTextArea chatBox;
     private JTextField inputField;
     Usuario u;
 
-    public PruebaInterfaz_chat() {
+    public Chat() {
         setTitle("Interfaz Chat");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(500, 500);
@@ -49,12 +49,12 @@ public class PruebaInterfaz_chat extends JFrame{
             inputField.setText("");
         }
     }
-
+    /*
     public static void main(String[] args) {
         PruebaInterfaz_chat chat = new PruebaInterfaz_chat();
         chat.setVisible(true);
         chat.setLocationRelativeTo(null);
-    }
+    }*/
 
 
 }
