@@ -14,7 +14,8 @@ public class Chat extends JFrame{
     private JTextField inputField;
     Usuario u;
 
-    public Chat() {
+    public Chat(Usuario u) {
+        this.u = u;
         setTitle("Interfaz Chat");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(500, 500);
@@ -49,12 +50,6 @@ public class Chat extends JFrame{
             inputField.setText("");
         }
     }
-    /*
-    public static void main(String[] args) {
-        PruebaInterfaz_chat chat = new PruebaInterfaz_chat();
-        chat.setVisible(true);
-        chat.setLocationRelativeTo(null);
-    }*/
 
 
 }
