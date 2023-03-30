@@ -52,6 +52,7 @@ public class Log extends JFrame implements ActionListener {
     public static void main(String args[]) {
         Log log = new Log();
         log.setVisible(true);
+        log.setResizable(false);
     }
 
     @Override
