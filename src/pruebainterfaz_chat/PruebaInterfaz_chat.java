@@ -12,6 +12,7 @@ public class PruebaInterfaz_chat extends JFrame{
 
     private JTextArea chatBox;
     private JTextField inputField;
+    Usuario u;
 
     public PruebaInterfaz_chat() {
         setTitle("Interfaz Chat");
@@ -33,12 +34,18 @@ public class PruebaInterfaz_chat extends JFrame{
 
         add(chatPanel, BorderLayout.CENTER);
         add(inputPanel, BorderLayout.SOUTH);
+        System.out.println("Hola");
+        System.out.println("Holaaa");
+        
+        //String s = inputField.getText();
+        Color color = Color.GREEN;
+        u = new Usuario("Eros", color);
     }
 
     private class SendButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String inputText = inputField.getText();
-            chatBox.append("Yo: " + inputText + "\n");
+            chatBox.append(u.getNombre() + ": " + inputText + "\n");
             inputField.setText("");
         }
     }
