@@ -14,7 +14,7 @@ public class Chat extends JFrame{
     private JTextField inputField;
     Usuario u;
 
-    public Chat(Usuario u) {
+    public Chat() {
         this.u = u;
         setTitle("Interfaz Chat");
         setDefaultCloseOperation(EXIT_ON_CLOSE);

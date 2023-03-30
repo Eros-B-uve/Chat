@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Log extends JFrame implements ActionListener {
-
+    
     JTextField FieldNombre;
     JButton conectar;
     
@@ -56,7 +56,10 @@ public class Log extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == conectar) {
-            
+            Chat ventanaChat = new Chat();
+            ventanaChat.setVisible(true);
+            ventanaChat.setLocationRelativeTo(null);
+            setVisible(false);
         }
     }
 }
