@@ -14,7 +14,7 @@ public class Chat extends JFrame{
     private JTextField inputField;
     Usuario u;
 
-    public Chat() {
+    public Chat(Usuario u) {
         this.u = u;
         setTitle("Interfaz Chat");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -43,18 +43,11 @@ public class Chat extends JFrame{
 
         add(chatPanel);
         add(inputPanel);
-        System.out.println("Hola");
-        System.out.println("Holaaa");
-        
-        //String s = inputField.getText();
-        Color color = Color.GREEN;
-        u = new Usuario("Eros", color);
     }
 
     private class SendButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String inputText = inputField.getText();
-            chatBox.append(u.getNombre() + ": " + inputText + "\n");
+            chatBox.append(u.getNombre() + ": " + inputField.getText() + "\n");
             inputField.setText("");
         }
     }
