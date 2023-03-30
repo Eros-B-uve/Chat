@@ -44,7 +44,7 @@ public class Log extends JFrame implements ActionListener {
         colores = new JButton("Colores");
         colores.setBounds(300, 200, 100, 30);
         colores.addActionListener(this);
-        
+
         conectar = new JButton("Conectar");
         conectar.setBounds(200, 250, 100, 30);
         conectar.addActionListener(this);
@@ -74,10 +74,9 @@ public class Log extends JFrame implements ActionListener {
                 setVisible(false);
             }
         }
-        
-        if(e.getSource()== colores){
-            JColorChooser Selectorcolor=new JColorChooser();
-                colorr=Selectorcolor.showDialog(null, "Seleccione un Color", Color.BLUE);
+
+        if (e.getSource() == colores) {
+            colorr = JColorChooser.showDialog(null, "Seleccione un Color", Color.BLUE);
         }
     }
 }
