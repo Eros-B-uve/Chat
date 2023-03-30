@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pruebainterfaz_chat;
 import javax.swing.*;
+
+import java.awt.Font;
 //import java.awt.*;
 import java.awt.event.*;
 
+//https://stackoverflow.com/questions/9650992/how-to-change-text-color-in-the-jtextarea
 public class Chat extends JFrame{
 
     private JTextArea chatBox;
@@ -34,17 +32,16 @@ public class Chat extends JFrame{
         chatBox = new JTextArea();
         chatBox.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(chatBox);
-        scrollPane.setBounds(0,0,300, 430);
+        scrollPane.setBounds(0,0, 500, 430);
 
         inputField = new JTextField();
         inputField.setBounds(1, 430,400, 30);
+        inputField.setFont(new Font("Arial", Font.PLAIN, 12));
 
         JButton enviar = new JButton("Enviar");
-        //enviar.setBackground(u.getColor());
         enviar.addActionListener(new SendButtonListener());
         enviar.setBounds(400, 430, 100, 30);
         
-
         panel.add(scrollPane);
         panel.add(inputField);
         panel.add(enviar);
