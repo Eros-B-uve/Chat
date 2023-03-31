@@ -13,6 +13,8 @@ public class Chat extends JFrame {
     Usuario u;
 
     public Chat(Usuario u) {
+        this.setVisible(true);
+        
         this.setTitle("Interfaz Chat");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(500, 500);
@@ -27,16 +29,20 @@ public class Chat extends JFrame {
 
     private void componentes() {
         JPanel panel = new JPanel(null);
-        panel.setBounds(0, 0, 500, 500);
         
         GridBagConstraints cons = new GridBagConstraints();
         cons.fill = GridBagConstraints.BOTH;
-
-        chatBox = new JTextPane();
-        //chatBox.setEditable(false);
-        chatBox.setBounds(0, 0, 100, 100);
-        JScrollPane scrollPane = new JScrollPane(chatBox, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBounds(0, 0, 490, 430);
+        
+        cons.gridheight = 1;
+        cons.gridwidth = 1;
+        cons.gridx = 0;
+        cons.gridy = 0;
+        chat(cons);
+        
+        cons.gridheight = 1;
+        cons.gridy++;
+        mensaje(cons);
+        
 
         inputField = new JTextField();
         inputField.setBounds(1, 430, 400, 30);
@@ -45,11 +51,34 @@ public class Chat extends JFrame {
         JButton enviar = new JButton("Enviar");
         enviar.addActionListener(new SendButtonListener());
         enviar.setBounds(400, 430, 100, 30);
-
-        panel.add(scrollPane);
-        panel.add(inputField);
-        panel.add(enviar);
-        add(panel);
+        
+    }
+    
+    private void chat(GridBagConstraints cons) {
+        JPanel panel = new JPanel(null);
+        panel.setBounds(0, 0, 100, 100);
+        panel.setSize(400, 400);
+        panel.setBackground(Color.red);
+        
+        GridBagConstraints constrains = new GridBagConstraints();
+        cons.fill = GridBagConstraints.BOTH;
+        cons.ipadx = 500;
+        cons.ipady = 400;
+        
+        chatBox = new JTextPane();
+        JScrollPane scrollPane = new JScrollPane(chatBox, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        
+        panel.add(new JButton("Hola"), constrains);
+        this.add(panel, cons);
+    }
+    
+    private void mensaje (GridBagConstraints cons) {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(Color.blue);
+        GridBagConstraints constrains = new GridBagConstraints();
+        cons.fill = GridBagConstraints.BOTH;
+        
+        this.add(panel, cons);
     }
 
     private void appendToPane(JTextPane tp, String msg, Color c) {
