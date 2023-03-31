@@ -9,8 +9,11 @@ import javax.swing.text.*;
 public class Chat extends JFrame {
 
     private JTextPane chatBox;
+    JTextArea area;
+    JButton boton;
     private JTextField inputField;
-    Usuario u;
+    private JScrollPane scrollPane;
+    private Usuario u;
 
     public Chat(Usuario u) {
         this.setVisible(true);
@@ -28,48 +31,60 @@ public class Chat extends JFrame {
     }
 
     private void componentes() {
-        JPanel panel = new JPanel(null);
-        
         GridBagConstraints cons = new GridBagConstraints();
-        cons.fill = GridBagConstraints.BOTH;
+        area = new JTextArea();
+        scrollPane = new JScrollPane(area);
+        inputField = new JTextField(20);
+        boton = new JButton("Enviar");
         
-        cons.gridheight = 1;
-        cons.gridwidth = 1;
         cons.gridx = 0;
         cons.gridy = 0;
-        chat(cons);
-        
+        cons.gridwidth = 2;
         cons.gridheight = 1;
-        cons.gridy++;
-        mensaje(cons);
+        cons.weightx = 1.0;
+        cons.weighty = 1.0;
+        cons.fill = GridBagConstraints.BOTH;
+        this.add(scrollPane, cons);
         
-
-        inputField = new JTextField();
-        inputField.setBounds(1, 430, 400, 30);
-        inputField.setFont(new Font("Arial", Font.PLAIN, 12));
-
-        JButton enviar = new JButton("Enviar");
-        enviar.addActionListener(new SendButtonListener());
-        enviar.setBounds(400, 430, 100, 30);
+        cons.gridx = 0;
+        cons.gridy = 1;
+        cons.gridwidth = 1;
+        cons.gridheight = 1;
+        cons.weightx = 1.0;
+        cons.weighty = 0.0;
+        cons.fill = GridBagConstraints.BOTH;
+        add(inputField, cons);
+        
+        cons.gridx = 1;
+        cons.gridy = 1;
+        cons.gridwidth = 1;
+        cons.gridheight = 1;
+        cons.weightx = 0.0;
+        cons.weighty = 0.0;
+        cons.fill = GridBagConstraints.BOTH;
+        this.add(boton, cons);
+        
         
     }
     
-    private void chat(GridBagConstraints cons) {
-        JPanel panel = new JPanel(null);
-        panel.setBounds(0, 0, 100, 100);
-        panel.setSize(400, 400);
+    private void chat() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBounds(0, 0, 500, 400);
         panel.setBackground(Color.red);
         
         GridBagConstraints constrains = new GridBagConstraints();
-        cons.fill = GridBagConstraints.BOTH;
-        cons.ipadx = 500;
-        cons.ipady = 400;
+        constrains.fill = GridBagConstraints.BOTH;
+        constrains.gridheight = 1;
+        constrains.gridwidth = 1;
+        constrains.gridx = 0;
+        constrains.gridy = 0;
         
         chatBox = new JTextPane();
-        JScrollPane scrollPane = new JScrollPane(chatBox, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane = new JScrollPane(new JTextArea(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        panel.add(new JButton("Hola"), constrains);
-        this.add(panel, cons);
+        panel.add(scrollPane, constrains);
+        panel.add(new JButton("Hola"));
+        this.add(panel);
     }
     
     private void mensaje (GridBagConstraints cons) {
@@ -77,6 +92,15 @@ public class Chat extends JFrame {
         panel.setBackground(Color.blue);
         GridBagConstraints constrains = new GridBagConstraints();
         cons.fill = GridBagConstraints.BOTH;
+        
+        
+        inputField = new JTextField();
+        inputField.setBounds(1, 430, 400, 30);
+        inputField.setFont(new Font("Arial", Font.PLAIN, 12));
+
+        JButton enviar = new JButton("Enviar");
+        enviar.addActionListener(new SendButtonListener());
+        enviar.setBounds(400, 430, 100, 30);
         
         this.add(panel, cons);
     }
