@@ -18,7 +18,7 @@ public class Chat extends JFrame {
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setLayout(null);
+        this.setLayout(new GridBagLayout());
 
         this.u = u;
 
@@ -28,6 +28,9 @@ public class Chat extends JFrame {
     private void componentes() {
         JPanel panel = new JPanel(null);
         panel.setBounds(0, 0, 500, 500);
+        
+        GridBagConstraints cons = new GridBagConstraints();
+        cons.fill = GridBagConstraints.BOTH;
 
         chatBox = new JTextPane();
         //chatBox.setEditable(false);
