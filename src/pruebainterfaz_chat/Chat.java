@@ -30,7 +30,7 @@ public class Chat extends JFrame {
         panel.setBounds(0, 0, 500, 500);
 
         chatBox = new JTextPane();
-        chatBox.setEditable(false);
+        //chatBox.setEditable(false);
         chatBox.setBounds(0, 0, 100, 100);
         JScrollPane scrollPane = new JScrollPane(chatBox, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBounds(0, 0, 490, 430);
@@ -43,9 +43,7 @@ public class Chat extends JFrame {
         enviar.addActionListener(new SendButtonListener());
         enviar.setBounds(400, 430, 100, 30);
 
-            appendToPane(chatBox, "Hola\n", Color.red);
-            appendToPane(chatBox, "Hola\n", Color.red);
-        panel.add(chatBox);
+        panel.add(scrollPane);
         panel.add(inputField);
         panel.add(enviar);
         add(panel);
@@ -67,7 +65,8 @@ public class Chat extends JFrame {
     private class SendButtonListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            appendToPane(chatBox, "Hola\n", Color.red);
+            appendToPane(chatBox, u.getNombre() + ": ", u.getColor());
+            appendToPane(chatBox, inputField.getText() + "\n", Color.BLACK);
             inputField.setText("");
         }
     }
