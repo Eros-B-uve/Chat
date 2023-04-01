@@ -6,13 +6,13 @@ import java.awt.event.*;
 import javax.swing.text.*;
 
 //https://stackoverflow.com/questions/9650992/how-to-change-text-color-in-the-jtextarea
-public class Chat extends JFrame {
+public class Chat extends JFrame implements ActionListener {
 
     private JTextPane chatBox;
-    JTextArea area;
-    JButton boton;
+    JButton enviar;
     private JTextField inputField;
     private JScrollPane scrollPane;
+
     private Usuario u;
 
     public Chat(Usuario u) {
@@ -32,10 +32,16 @@ public class Chat extends JFrame {
 
     private void componentes() {
         GridBagConstraints cons = new GridBagConstraints();
-        area = new JTextArea();
-        scrollPane = new JScrollPane(area);
+        
+        chatBox = new JTextPane();
+        chatBox.setFont(new Font("Arial", Font.PLAIN, 15));
+        chatBox.setEditable(false);
+        scrollPane = new JScrollPane(chatBox);
+
         inputField = new JTextField(20);
-        boton = new JButton("Enviar");
+        inputField.setFont(new Font("Arial", Font.PLAIN, 15));
+
+        enviar = new JButton("Enviar");
         
         cons.gridx = 0;
         cons.gridy = 0;
@@ -62,50 +68,13 @@ public class Chat extends JFrame {
         cons.weightx = 0.0;
         cons.weighty = 0.0;
         cons.fill = GridBagConstraints.BOTH;
-        this.add(boton, cons);
+        enviar.addActionListener(this);
+        this.add(enviar, cons);
         
-        
-    }
-    
-    private void chat() {
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBounds(0, 0, 500, 400);
-        panel.setBackground(Color.red);
-        
-        GridBagConstraints constrains = new GridBagConstraints();
-        constrains.fill = GridBagConstraints.BOTH;
-        constrains.gridheight = 1;
-        constrains.gridwidth = 1;
-        constrains.gridx = 0;
-        constrains.gridy = 0;
-        
-        chatBox = new JTextPane();
-        scrollPane = new JScrollPane(new JTextArea(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        
-        panel.add(scrollPane, constrains);
-        panel.add(new JButton("Hola"));
-        this.add(panel);
-    }
-    
-    private void mensaje (GridBagConstraints cons) {
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBackground(Color.blue);
-        GridBagConstraints constrains = new GridBagConstraints();
-        cons.fill = GridBagConstraints.BOTH;
-        
-        
-        inputField = new JTextField();
-        inputField.setBounds(1, 430, 400, 30);
-        inputField.setFont(new Font("Arial", Font.PLAIN, 12));
-
-        JButton enviar = new JButton("Enviar");
-        enviar.addActionListener(new SendButtonListener());
-        enviar.setBounds(400, 430, 100, 30);
-        
-        this.add(panel, cons);
     }
 
     private void appendToPane(JTextPane tp, String msg, Color c) {
+        tp.setEditable(true);
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
 
@@ -116,11 +85,12 @@ public class Chat extends JFrame {
         tp.setCaretPosition(len);
         tp.setCharacterAttributes(aset, false);
         tp.replaceSelection(msg);
+        tp.setEditable(false);
     }
 
-    private class SendButtonListener implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == enviar) {
             appendToPane(chatBox, u.getNombre() + ": ", u.getColor());
             appendToPane(chatBox, inputField.getText() + "\n", Color.BLACK);
             inputField.setText("");
