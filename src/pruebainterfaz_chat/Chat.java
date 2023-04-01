@@ -111,7 +111,6 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            System.out.println("Hola");
             enviar();
         }
     }
