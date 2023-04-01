@@ -6,10 +6,10 @@ import java.awt.event.*;
 import javax.swing.text.*;
 
 //https://stackoverflow.com/questions/9650992/how-to-change-text-color-in-the-jtextarea
-public class Chat extends JFrame implements ActionListener {
+public class Chat extends JFrame implements ActionListener, KeyListener {
 
     private JTextPane chatBox;
-    JButton enviar;
+    private JButton enviar;
     private JTextField inputField;
     private JScrollPane scrollPane;
 
@@ -17,7 +17,7 @@ public class Chat extends JFrame implements ActionListener {
 
     public Chat(Usuario u) {
         this.setVisible(true);
-        
+
         this.setTitle("Interfaz Chat");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(500, 500);
@@ -32,7 +32,7 @@ public class Chat extends JFrame implements ActionListener {
 
     private void componentes() {
         GridBagConstraints cons = new GridBagConstraints();
-        
+
         chatBox = new JTextPane();
         chatBox.setFont(new Font("Arial", Font.PLAIN, 15));
         chatBox.setEditable(false);
@@ -40,9 +40,10 @@ public class Chat extends JFrame implements ActionListener {
 
         inputField = new JTextField(20);
         inputField.setFont(new Font("Arial", Font.PLAIN, 15));
+        inputField.addKeyListener(this);
 
         enviar = new JButton("Enviar");
-        
+
         cons.gridx = 0;
         cons.gridy = 0;
         cons.gridwidth = 2;
@@ -51,7 +52,7 @@ public class Chat extends JFrame implements ActionListener {
         cons.weighty = 1.0;
         cons.fill = GridBagConstraints.BOTH;
         this.add(scrollPane, cons);
-        
+
         cons.gridx = 0;
         cons.gridy = 1;
         cons.gridwidth = 1;
@@ -60,7 +61,7 @@ public class Chat extends JFrame implements ActionListener {
         cons.weighty = 0.0;
         cons.fill = GridBagConstraints.BOTH;
         add(inputField, cons);
-        
+
         cons.gridx = 1;
         cons.gridy = 1;
         cons.gridwidth = 1;
@@ -70,7 +71,7 @@ public class Chat extends JFrame implements ActionListener {
         cons.fill = GridBagConstraints.BOTH;
         enviar.addActionListener(this);
         this.add(enviar, cons);
-        
+
     }
 
     private void appendToPane(JTextPane tp, String msg, Color c) {
@@ -88,13 +89,35 @@ public class Chat extends JFrame implements ActionListener {
         tp.setEditable(false);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == enviar) {
+    public void enviar() {
+        if (!inputField.getText().isEmpty()) {
             appendToPane(chatBox, u.getNombre() + ": ", u.getColor());
             appendToPane(chatBox, inputField.getText() + "\n", Color.BLACK);
             inputField.setText("");
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == enviar) {
+            enviar();
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println("Hola");
+            enviar();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 
 }
