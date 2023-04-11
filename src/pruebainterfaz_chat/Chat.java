@@ -91,8 +91,43 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
 
     public void enviar() {
         if (!inputField.getText().isEmpty()) {
-            appendToPane(chatBox, u.getNombre() + ": ", u.getColor());
-            appendToPane(chatBox, inputField.getText() + "\n", Color.BLACK);
+            String msg = inputField.getText();
+            if (msg.charAt(0) == '/') {
+                switch (msg.substring(1).toLowerCase()) {
+                    case "clear":
+                        chatBox.setText("");
+                        break;
+                    case "color":
+                            u.setColor(JColorChooser.showDialog(null, "Seleccione un Color", u.getColor()));
+                            appendToPane(chatBox, "El color se ha cambiado\n", Color.gray);
+                            break;
+                    case "exit":
+                        System.exit(0);
+                        break;
+                    case "help":
+                            appendToPane(chatBox, "CLEAR    Borra la pantalla\n", Color.gray);
+                            appendToPane(chatBox, "COLOR    Cambia el color del usuario\n", Color.gray);
+                            appendToPane(chatBox, "EXIT     Cierra la aplicacion\n", Color.gray);
+                            appendToPane(chatBox, "HELP     Muestra el menu de comandos\n", Color.gray);
+                            appendToPane(chatBox, "NAME     Cambia el nombre del usuario\n", Color.gray);
+                            break;
+                    case "name":
+                        String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre", "nombre");
+                        if (!nuevoNombre.isBlank()) {
+                            u.setNombre(nuevoNombre);
+                            appendToPane(chatBox, "Nuevo nombre cambiado a '" + nuevoNombre + "'\n", Color.gray);
+                        } else {
+                            appendToPane(chatBox, "Nombre no valido" + "\n", Color.gray);
+                        }
+                        break;
+                    default:
+                        appendToPane(chatBox, "'" + msg + "' no es un comando reconocido\n", Color.gray);
+                        break;
+                }
+            } else {
+                appendToPane(chatBox, u.getNombre() + ": ", u.getColor());
+                appendToPane(chatBox, msg + "\n", Color.BLACK);
+            }
             inputField.setText("");
         }
     }
