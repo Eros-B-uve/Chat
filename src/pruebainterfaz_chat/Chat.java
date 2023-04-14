@@ -3,17 +3,23 @@ package pruebainterfaz_chat;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Scanner;
+
 import javax.swing.text.*;
 
 //https://stackoverflow.com/questions/9650992/how-to-change-text-color-in-the-jtextarea
 public class Chat extends JFrame implements ActionListener, KeyListener {
 
-    private JTextPane chatBox;
+    public JTextPane chatBox;
     private JButton enviar;
     private JTextField inputField;
     private JScrollPane scrollPane;
 
     private Usuario u;
+    public PrintWriter cout;
+    private Socket socket;
 
     public Chat(Usuario u) {
         this.setVisible(true);
@@ -27,7 +33,21 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
 
         this.u = u;
 
+        inicarSocket();
         componentes();
+    }
+    
+    private void inicarSocket() {
+        try {
+            socket = new Socket("localhost", 5000);
+            cout = new PrintWriter(socket.getOutputStream(), true);
+            
+            ThreadClient threadClient = new ThreadClient(socket, this);
+            new Thread(threadClient).start(); // start thread to receive message
+            cout.println(u.getNombre() + ": ha entrado al chat¤-8355712");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e + "No se ha podido establecer conexion");
+        }
     }
 
     private void componentes() {
@@ -74,7 +94,7 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
 
     }
 
-    private void appendToPane(JTextPane tp, String msg, Color c) {
+    public void appendToPane(JTextPane tp, String msg, Color c) {
         tp.setEditable(true);
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
@@ -98,19 +118,19 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
                         chatBox.setText("");
                         break;
                     case "color":
-                            u.setColor(JColorChooser.showDialog(null, "Seleccione un Color", u.getColor()));
-                            appendToPane(chatBox, "El color se ha cambiado\n", Color.gray);
-                            break;
+                        u.setColor(JColorChooser.showDialog(null, "Seleccione un Color", u.getColor()));
+                        appendToPane(chatBox, "El color se ha cambiado\n", Color.gray);
+                        break;
                     case "exit":
                         System.exit(0);
                         break;
                     case "help":
-                            appendToPane(chatBox, "CLEAR    Borra la pantalla\n", Color.gray);
-                            appendToPane(chatBox, "COLOR    Cambia el color del usuario\n", Color.gray);
-                            appendToPane(chatBox, "EXIT     Cierra la aplicacion\n", Color.gray);
-                            appendToPane(chatBox, "HELP     Muestra el menu de comandos\n", Color.gray);
-                            appendToPane(chatBox, "NAME     Cambia el nombre del usuario\n", Color.gray);
-                            break;
+                        appendToPane(chatBox, "CLEAR    Borra la pantalla\n", Color.gray);
+                        appendToPane(chatBox, "COLOR    Cambia el color del usuario\n", Color.gray);
+                        appendToPane(chatBox, "EXIT     Cierra la aplicacion\n", Color.gray);
+                        appendToPane(chatBox, "HELP     Muestra el menu de comandos\n", Color.gray);
+                        appendToPane(chatBox, "NAME     Cambia el nombre del usuario\n", Color.gray);
+                        break;
                     case "name":
                         String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre", "nombre");
                         if (!nuevoNombre.isBlank()) {
@@ -125,8 +145,10 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
                         break;
                 }
             } else {
-                appendToPane(chatBox, u.getNombre() + ": ", u.getColor());
+                appendToPane(chatBox, u.getNombre() + "(Tu): ", u.getColor());
                 appendToPane(chatBox, msg + "\n", Color.BLACK);
+
+                cout.println(u.getNombre() + ": " + msg + "¤" + u.getColor().getRGB());
             }
             inputField.setText("");
         }

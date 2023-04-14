@@ -59,8 +59,8 @@ public class Log extends JFrame implements ActionListener {
 
     public static void main(String args[]) {
         Log log = new Log();
-        //log.setVisible(true);
-        new Chat(new Usuario("Erick", Color.red));
+        log.setVisible(true);
+        //new Chat(new Usuario("Erick", Color.red));
     }
 
     @Override
@@ -71,7 +71,8 @@ public class Log extends JFrame implements ActionListener {
             } else if(colorr == null) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar un color");
             } else {
-                Chat ventanaChat = new Chat(new Usuario(FieldNombre.getText(), colorr));
+                Usuario u = new Usuario(FieldNombre.getText(), colorr);
+                Chat ventanaChat = new Chat(u);
                 ventanaChat.setVisible(true);
                 ventanaChat.setLocationRelativeTo(null);
                 setVisible(false);
