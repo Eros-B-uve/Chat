@@ -3,3 +3,6 @@
 *.xml
 */*.xml
 */*/*.xml
+*.properties
+*/*.properties
+*/*/*.properties
