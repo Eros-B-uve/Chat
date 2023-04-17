@@ -32,13 +32,13 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
 
         this.u = u;
 
-        inicarSocket();
+        inicarSocket(JOptionPane.showInputDialog("Ingrese la ip del servidor", "192.168.1.68"));
         componentes();
     }
     
-    private void inicarSocket() {
+    private void inicarSocket(String ip) {
         try {
-            socket = new Socket("172.29.192.1", 5000);
+            socket = new Socket(ip, 5000);
             cout = new PrintWriter(socket.getOutputStream(), true);
             
             ThreadClient threadClient = new ThreadClient(socket, this);
