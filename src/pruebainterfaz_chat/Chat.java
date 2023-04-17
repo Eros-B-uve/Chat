@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Scanner;
 
 import javax.swing.text.*;
 
@@ -39,7 +38,7 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
     
     private void inicarSocket() {
         try {
-            socket = new Socket("localhost", 5000);
+            socket = new Socket("172.29.192.1", 5000);
             cout = new PrintWriter(socket.getOutputStream(), true);
             
             ThreadClient threadClient = new ThreadClient(socket, this);
