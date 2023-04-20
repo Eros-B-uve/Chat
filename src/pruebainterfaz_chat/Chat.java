@@ -24,6 +24,8 @@ public class Chat extends JFrame implements ActionListener, KeyListener {
         this.setVisible(true);
 
         this.setTitle("Interfaz Chat");
+        ImageIcon img = new ImageIcon("C:\\Users\\Eros\\Documents\\GitHub\\Chat\\src\\imagenes\\icono3.png");
+        this.setIconImage(img.getImage());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);

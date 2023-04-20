@@ -1,9 +1,13 @@
 package pruebainterfaz_chat;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
@@ -20,6 +24,8 @@ public class Log extends JFrame implements ActionListener {
 
     public Log() {
         this.setTitle("Interfaz Chat");
+        ImageIcon img = new ImageIcon("C:\\Users\\Eros\\Documents\\GitHub\\Chat\\src\\imagenes\\icono3.png");
+        this.setIconImage(img.getImage());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
